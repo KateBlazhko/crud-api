@@ -2,8 +2,8 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 import { v4 as uuidv4 } from 'uuid';
 import http from 'http';
-import { ENDPOINT, statusMessages } from './constants.js';
-import { TUser } from './model.js';
+import { ENDPOINT, statusMessages } from './constants';
+import { TUser } from './model';
 
 export class ServerService {
   public users: TUser[] = [{ id: 'id1', username: 'name1', age: 18, hobbies: [] }];
