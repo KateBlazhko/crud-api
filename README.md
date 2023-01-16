@@ -1,4 +1,4 @@
-# crud-api
+# Simple CRUD API
 
 Hello, there!
 
@@ -11,6 +11,7 @@ Hello, there!
 **2. Change directory and branch**
 
 `cd crud-api`
+
 `git checkout develop`
 
 **3. Install deps**
