@@ -5,7 +5,7 @@
   "main": "index.ts",
   "scripts": {
     "start:dev": "npx cross-env CASE=single nodemon -r dotenv/config",
-    "start:prod": "npx cross-env CASE=single webpack & node ./dist/bundle.js",
+    "start:prod": "npx cross-env CASE=single webpack && node ./dist/bundle.js",
     "start:multi": "npx cross-env CASE=multi nodemon -r dotenv/config",
     "lint": "npx eslint ./src",
     "format": "npx eslint ./src --fix",
