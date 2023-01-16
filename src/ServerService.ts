@@ -1,8 +1,6 @@
-import * as dotenv from 'dotenv';
-dotenv.config();
 import { v4 as uuidv4 } from 'uuid';
 import http from 'http';
-import { ENDPOINT, statusMessages } from './constants';
+import { ENDPOINT, PORT_NAME, statusMessages } from './constants';
 import { TUser } from './model';
 
 export class ServerService {
@@ -29,9 +27,12 @@ export class ServerService {
       this.responseWithError(response, 500, statusMessages.serverError);
     }
   });
+  public port = process.env.id ? PORT_NAME + Number(process.env.id) : PORT_NAME;
+
+  constructor(public processWorker?: NodeJS.Process) {}
 
   public start() {
-    this.server.listen(process.env.PORT_NAME);
+    this.server.listen(this.port);
   }
 
   public close() {
@@ -80,7 +81,6 @@ export class ServerService {
 
       if (userId && this.validateID(userId)) {
         const foundUser = this.users.find((user) => user.id === userId);
-
         if (foundUser) {
           callback(foundUser);
         } else {
@@ -119,8 +119,9 @@ export class ServerService {
             const newUser = { ...body, id: uuidv4() };
 
             this.responseSuccess(response, 201, JSON.stringify(newUser));
-
             this.users.push(newUser);
+
+            process.send && process.send({ id: Number(process.env.id), method: 'post', data: newUser });
           });
         });
       return;
@@ -144,6 +145,8 @@ export class ServerService {
             this.users = this.users.map((user) => (user.id === userId ? updatedUser : user));
 
             this.responseSuccess(response, 200, JSON.stringify(updatedUser));
+
+            process.send && process.send({ id: Number(process.env.id), method: 'post', data: updatedUser });
           });
         });
     });
@@ -154,6 +157,7 @@ export class ServerService {
       this.users = this.users.filter((user) => user.id !== foundUser.id);
 
       this.responseSuccess(response, 204);
+      process.send && process.send({ id: Number(process.env.id), method: 'post', data: foundUser });
     });
   }
 }

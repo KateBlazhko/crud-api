@@ -4,8 +4,9 @@
   "description": "simple server via node",
   "main": "index.ts",
   "scripts": {
-    "dev": "npx nodemon -r dotenv/config",
-    "prod": "npx webpack & node ./dist/bundle.js",
+    "start:dev": "npx cross-env CASE=single nodemon -r dotenv/config",
+    "start:prod": "npx cross-env CASE=single webpack & node ./dist/bundle.js",
+    "start:multi": "npx cross-env CASE=multi nodemon -r dotenv/config",
     "lint": "npx eslint ./src",
     "format": "npx eslint ./src --fix",
     "test": "jest"
@@ -41,6 +42,7 @@
   },
   "type": "module",
   "dependencies": {
+    "cross-env": "^7.0.3",
     "dotenv": "^16.0.3",
     "uuid": "^9.0.0"
   }

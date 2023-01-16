@@ -1,3 +1,6 @@
+import * as dotenv from 'dotenv';
+dotenv.config();
+
 export const ENDPOINT = `/api/users`;
 
 export enum statusMessages {
@@ -7,3 +10,5 @@ export enum statusMessages {
   invalidEndpoint = 'Sorry, there is not this endpoint',
   invalidBody = 'Sorry, body does not contain required fields',
 }
+
+export const PORT_NAME = Number(process.env.PORT_NAME);

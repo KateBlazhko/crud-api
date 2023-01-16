@@ -1,4 +1,10 @@
+import { LoadBalancer } from './LoadBalancer';
 import { ServerService } from './ServerService';
 
-const server = new ServerService();
-server.start();
+if (process.env.CASE === 'multi') {
+  const balancer = new LoadBalancer();
+  balancer.start();
+} else {
+  const server = new ServerService();
+  server.start();
+}
