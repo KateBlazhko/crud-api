@@ -1,0 +1,24 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "extends": ["plugin:@typescript-eslint/recommended", "prettier", "plugin:prettier/recommended"],
+  "env": {
+    "es6": true,
+    "jest": true,
+    "node": true
+  },
+  "root": true,
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["@typescript-eslint", "prettier", "eslint-plugin-prettier"],
+  "rules": {
+    "comma-dangle": ["error", "only-multiline"],
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ]
+  }
+}
